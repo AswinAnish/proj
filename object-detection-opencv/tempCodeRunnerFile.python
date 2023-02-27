@@ -1,0 +1,32 @@
+import cv2
+
+# Create a video capture object
+cap = cv2.VideoCapture(0)
+
+# Get the video frame width and height
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+# Create a window to display the video
+cv2.namedWindow("Video", cv2.WINDOW_NORMAL)
+
+# Define the line that divides the video
+line_pos = int(width / 2)
+print(line_pos)
+# Read the video frames and display them
+while True:
+    ret, frame = cap.read()
+
+    # Draw the line that divides the video
+    cv2.line(frame, (line_pos, 0), (line_pos, height), (0, 255, 0), 2)
+
+    # Show the video frame in the window
+    cv2.imshow("Video", frame)
+
+    # Exit the loop if the 'q' key is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Release the video capture object and destroy the window
+cap.release()
+cv2.destroyAllWindows()
